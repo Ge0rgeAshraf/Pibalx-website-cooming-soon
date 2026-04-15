@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIBALX | The Next Generation of Video Surveillance</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0a0a0b',
+                        card: '#0e0e0f',
+                        accent: '#00f2ff', /* Neon Cyan */
+                        accentHover: '#33f5ff',
+                    },
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Reset */
+        body {
+            background-color: #0a0a0b;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Pure CSS Background Effects */
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(0, 242, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 242, 255, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Vignette to blend grid into darkness at edges */
+        .bg-vignette {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, transparent 20%, #0a0a0b 90%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Scanning Line Animation */
+        @keyframes scan {
+            0% { transform: translateY(-100vh); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .scanner-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #00f2ff;
+            box-shadow: 0 0 15px #00f2ff, 0 0 30px #00f2ff, 0 40px 40px -10px rgba(0, 242, 255, 0.1);
+            animation: scan 8s linear infinite;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Subtle Glows */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+        }
+        
+        .glow-box {
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
+        }
+        
+        .glow-box:hover, .glow-box:focus-within {
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+        }
+
+        /* Focus outline reset for custom Tailwind rings */
+        input:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative antialiased selection:bg-accent selection:text-dark">
+
+    <div class="bg-grid"></div>
+    <div class="bg-vignette"></div>
+    <div class="scanner-line"></div>
+
+    <header class="relative z-10 w-full p-6 md:p-8 lg:px-12 flex justify-between items-center border-b border-white/5 bg-dark/50 backdrop-blur-md">
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-accent text-3xl animate-pulse-slow drop-shadow-[0_0_8px_rgba(0,242,255,0.8)]" aria-hidden="true">
+                visibility
+            </span>
+            <span class="font-display font-bold text-2xl tracking-[0.2em] text-white select-none">
+                PIBALX
+            </span>
+        </div>
+        
+        <div class="hidden md:flex items-center gap-2 px-3 py-1 rounded-full border border-accent/20 bg-accent/5">
+            <div class="w-2 h-2 rounded-full bg-accent animate-pulse"></div>
+            <span class="text-xs font-display text-accent uppercase tracking-widest">System Offline</span>
+        </div>
+    </header>
+
+    <main class="relative z-10 flex-grow flex flex-col items-center justify-center px-6 py-20 text-center">
+        
+        <div class="inline-flex items-center gap-2 mb-6">
+            <span class="h-[1px] w-8 bg-accent/50 block"></span>
+            <span class="font-display text-accent tracking-[0.4em] text-sm font-semibold uppercase glow-text">The Eye X</span>
+            <span class="h-[1px] w-8 bg-accent/50 block"></span>
+        </div>
+
+        <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] max-w-4xl">
+            Redefining Vision.<br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-500">Zero Latency.</span><br>
+            Infinite Insights.
+        </h1>
+
+        <p class="text-gray-400 text-lg md:text-xl mb-12 max-w-2xl font-sans leading-relaxed">
+            Advanced forensic search, AI-powered analytics, and absolute visual clarity. The ultimate Video Management System is deploying soon.
+        </p>
+
+        <form class="w-full max-w-md md:max-w-xl mx-auto flex flex-col md:flex-row gap-4 md:gap-0 relative group glow-box transition-shadow duration-500 rounded-xl md:rounded-full bg-card border border-white/10 p-1 md:p-1.5" onsubmit="event.preventDefault(); alert('Access request logged. Connecting to secure server...');">
+            
+            <div class="relative flex-grow flex items-center">
+                <span class="material-symbols-outlined absolute left-5 text-gray-500 pointer-events-none">
+                    radar
+                </span>
+                <input 
+                    type="email" 
+                    placeholder="Enter your clearance email..." 
+                    required
+                    class="w-full bg-transparent text-white placeholder-gray-500 font-sans pl-14 pr-6 py-4 md:py-3 rounded-lg md:rounded-l-full focus:ring-0"
+                >
+            </div>
+            
+            <button 
+                type="submit" 
+                class="bg-accent text-dark font-display font-bold uppercase tracking-wider text-sm px-8 py-4 md:py-3 rounded-lg md:rounded-full hover:bg-accentHover hover:shadow-[0_0_20px_rgba(0,242,255,0.5)] transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap"
+            >
+                Request Access
+                <span class="material-symbols-outlined text-lg">
+                    arrow_forward
+                </span>
+            </button>
+        </form>
+        
+        <p class="mt-6 text-xs text-gray-600 font-sans tracking-wide">
+            Strictly limited early access. Subject to verification.
+        </p>
+
+    </main>
+
+    <footer class="relative z-10 w-full p-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center border-t border-white/5 bg-dark/80 backdrop-blur-sm gap-4 text-sm text-gray-500 font-sans">
+        <p>&copy; 2026 PIBALX Systems. All rights reserved.</p>
+        <div class="flex gap-6">
+            <a href="#" class="hover:text-accent transition-colors duration-200">Privacy Protocol</a>
+            <a href="#" class="hover:text-accent transition-colors duration-200">Secure Contact</a>
+        </div>
+    </footer>
+
+</body>
+</html>
